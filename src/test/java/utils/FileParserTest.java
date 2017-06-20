@@ -71,6 +71,6 @@ public class FileParserTest
 	{
 		Assert.assertEquals("5 5", lines.get(0));
 	    Assert.assertEquals("1 2 N", lines.get(1));
-	    Assert.assertEquals("1 2 S", lines.get(2));
+	    Assert.assertEquals("GAA    GAGA     GA    GAG  A", lines.get(2));
 	}
 }
