@@ -47,7 +47,24 @@ public class LawnMowerModel extends PointXY implements Movable,Turnable
 	public LawnMowerModel(int width, int height, int xPosition, int yPosition, char orientation)
 	{
 		this(width, height);
-		super.setPositions(xPosition, yPosition);
+		if (xPosition >= 0 && xPosition <= width - 1)
+		{
+			super.setXPosition(xPosition);
+		}
+		else
+		{
+			super.setXPosition(0);
+		}
+		
+		if (yPosition >= 0 && yPosition <= height - 1)
+		{
+			super.setYPosition(yPosition);
+		}
+		else
+		{
+			super.setYPosition(0);
+		}
+		
 		this.setOrientation(orientation);
 	}
 	
