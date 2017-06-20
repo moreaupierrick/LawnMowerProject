@@ -13,9 +13,9 @@ import java.util.Scanner;
  */
 public class FileReader
 {
-	public static FileReader instance;
+	public static FileReader instance; // one unique instance (singleton)
 
-	public static FileReader getInstance()
+	public static FileReader getInstance() 
 	{
 		if (FileReader.instance == null)
 		{
@@ -25,7 +25,7 @@ public class FileReader
 	}
 
 	/**
-	 * 
+	 * used to parse the file line after line
 	 * @param filePath
 	 * @throws Exception 
 	 */
@@ -36,13 +36,13 @@ public class FileReader
 		File file = getFileFromRessources(fileName);
 		try
 		{
-			Scanner scanner = new Scanner(file);
+			Scanner scanner = new Scanner(file); // Scanner used because more simple to developed
 			while (scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
 				if (line != null && !line.isEmpty())
 				{
-					lines.add(line.trim());
+					lines.add(line.trim()); // used to delete all the spaces at the beginning and the end of the line
 				}
 			}
 
@@ -58,7 +58,7 @@ public class FileReader
 	}
 
 	/**
-	 * 
+	 * used to get a file from resources folder
 	 * @param fileName
 	 * @return
 	 */
@@ -67,23 +67,5 @@ public class FileReader
 		//Get file from resources folder
 		ClassLoader classLoader = getClass().getClassLoader();
 		return new File(classLoader.getResource(fileName).getFile());
-	}
-	
-	public static void main(String[] args)
-	{
-		FileReader reader = FileReader.getInstance();
-		
-		if (reader != null)
-		{
-			try
-			{
-				System.out.println(reader.parseFile("LawnMowerCase.txt"));
-			}
-			catch (Exception e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}	
 	}
 }
