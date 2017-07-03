@@ -6,7 +6,7 @@ package commons;
  * @author PMoreau
  *
  */
-public class PointXY
+public class Engine
 {
 	private int xPosition;
 	private int yPosition;
@@ -14,7 +14,7 @@ public class PointXY
 	/**
 	 * initialize the point outside of the space
 	 */
-	public PointXY()
+	public Engine()
 	{
 		this.xPosition = -1;
 		this.yPosition = -1;

@@ -3,12 +3,11 @@ package transformer;
 import java.util.ArrayList;
 import java.util.List;
 
+import commons.Command;
 import commons.Constants;
-
-import model.CommandModel;
-import transformer.impl.FirstCommandLineTransformer;
-import transformer.impl.OddCommandLineTransformer;
-import transformer.impl.PairCommandLineTransformer;
+import transformer.impl.EngineInitializationCommandTransformer;
+import transformer.impl.MapInitializationCommandTransformer;
+import transformer.impl.EngineMovesCommandTransformer;
 import utils.FileReader;
 
 /**
@@ -18,9 +17,9 @@ import utils.FileReader;
  */
 public class FileTransformer
 {
-	private FirstCommandLineTransformer firstCommanndLineTransformer;
-	private OddCommandLineTransformer oddCommandLineTransformer;
-	private PairCommandLineTransformer pairCommandLineTransformer;
+	private MapInitializationCommandTransformer mapInitializationCommandTransformer;
+	private EngineInitializationCommandTransformer engineInitializationCommandTransformer;
+	private EngineMovesCommandTransformer engineMovesCommandTransformer;
 
 	public FileTransformer()
 	{
@@ -29,24 +28,24 @@ public class FileTransformer
 	
 	private void init()
 	{
-		this.firstCommanndLineTransformer = new FirstCommandLineTransformer();
-		this.oddCommandLineTransformer = new OddCommandLineTransformer();
-		this.pairCommandLineTransformer = new PairCommandLineTransformer();
+		this.mapInitializationCommandTransformer = new MapInitializationCommandTransformer();
+		this.engineInitializationCommandTransformer = new EngineInitializationCommandTransformer();
+		this.engineMovesCommandTransformer = new EngineMovesCommandTransformer();
 	}
 
-	public FirstCommandLineTransformer getFirstCommanndLineTransformer()
+	public MapInitializationCommandTransformer getMapInitializationCommandTransformer()
 	{
-		return firstCommanndLineTransformer;
+		return this.mapInitializationCommandTransformer;
 	}
 
-	public OddCommandLineTransformer getOddCommandLineTransformer()
+	public EngineInitializationCommandTransformer getEngineInitializationCommandTransformer()
 	{
-		return oddCommandLineTransformer;
+		return this.engineInitializationCommandTransformer;
 	}
 
-	public PairCommandLineTransformer getPairCommandLineTransformer()
+	public EngineMovesCommandTransformer getEngineMovesCommandTransformer()
 	{
-		return pairCommandLineTransformer;
+		return this.engineMovesCommandTransformer;
 	}
 	
 	/**
@@ -55,10 +54,10 @@ public class FileTransformer
 	 * @return
 	 * @throws Exception
 	 */
-	public List<CommandModel> transformFile(String fileName) throws Exception
+	public List<Command> transformFile(String fileName) throws Exception
 	{
-		List<CommandModel> commands = new ArrayList<CommandModel>();
-		List<String> lines = FileReader.getInstance().parseFile(fileName);
+		List<Command> commands = new ArrayList<Command>();
+		List<String> lines = FileReader.parseFile(fileName);
 		
 		int i = Constants.ZERO_CONSTANT;
 		
@@ -66,18 +65,18 @@ public class FileTransformer
 		{
 			for (String line : lines)
 			{
-				CommandModel command;
+				Command command;
 				if (i == Constants.ZERO_CONSTANT)
 				{
-					command = firstCommanndLineTransformer.transform(line);
+					command = mapInitializationCommandTransformer.transform(line);
 				}
 				else if (i % Constants.PAIR_DIVIDER == Constants.ZERO_CONSTANT)
 				{
-					command = pairCommandLineTransformer.transform(line);
+					command = engineMovesCommandTransformer.transform(line);
 				}
 				else
 				{
-					command = oddCommandLineTransformer.transform(line);
+					command = engineInitializationCommandTransformer.transform(line);
 				}
 				
 				if (command != null)

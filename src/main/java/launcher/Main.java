@@ -1,5 +1,10 @@
 package launcher;
 
+import java.util.List;
+
+import commons.Command;
+
+import transformer.FileTransformer;
 import map.MapManager;
 
 /**
@@ -16,15 +21,19 @@ public class Main
 	 */
 	public static void main (String[] args)
 	{
-		MapManager map = new MapManager();
-		if (args.length > 0)
+		try
 		{
-			// get the first parameter of the program call and use it at the fileName
-			map.execute(args[0]);
+			List<Command> commands = new FileTransformer().transformFile(args.length > 0 ? args[0] : "LawnMowerCase.txt");
+			System.out.println(commands);
+			if (commands != null && !commands.isEmpty())
+			{
+				new MapManager().execute(commands);
+			}
 		}
-		else
+		catch (Exception e)
 		{
-			map.execute("LawnMowerCase.txt");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

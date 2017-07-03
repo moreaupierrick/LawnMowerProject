@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,30 +12,20 @@ import java.util.Scanner;
  */
 public class FileReader
 {
-	public static FileReader instance; // one unique instance (singleton)
-
-	public static FileReader getInstance() 
-	{
-		if (FileReader.instance == null)
-		{
-			FileReader.instance = new FileReader();
-		}
-		return FileReader.instance;
-	}
-
 	/**
 	 * used to parse the file line after line
 	 * @param filePath
 	 * @throws Exception 
 	 */
-	public List<String> parseFile(String fileName) throws Exception
+	public static List<String> parseFile(String fileName) throws Exception
 	{
 		List<String> lines = new ArrayList<String>();
 
 		File file = getFileFromRessources(fileName);
-		try
+		Scanner scanner = new Scanner(file);
+		try	
 		{
-			Scanner scanner = new Scanner(file); // Scanner used because more simple to developed
+			// Scanner used because more simple to developed
 			while (scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
@@ -45,13 +34,10 @@ public class FileReader
 					lines.add(line.trim()); // used to delete all the spaces at the beginning and the end of the line
 				}
 			}
-
-			scanner.close();
-
 		}
-		catch (IOException e)
+		finally
 		{
-			e.printStackTrace();
+			scanner.close();
 		}
 
 		return lines;
@@ -62,10 +48,10 @@ public class FileReader
 	 * @param fileName
 	 * @return
 	 */
-	private File getFileFromRessources(String fileName)
+	private static File getFileFromRessources(String fileName)
 	{
 		//Get file from resources folder
-		ClassLoader classLoader = getClass().getClassLoader();
+		ClassLoader classLoader = FileReader.class.getClassLoader();
 		return new File(classLoader.getResource(fileName).getFile());
 	}
 }
