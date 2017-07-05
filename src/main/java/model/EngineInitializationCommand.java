@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.log4j.Logger;
+
 import commons.Command;
 import commons.Constants;
 import commons.Orientation;
@@ -8,6 +10,8 @@ import commons.Engine;
 
 public class EngineInitializationCommand extends Engine implements Command
 {
+	static final Logger logger = Logger.getLogger(EngineInitializationCommand.class);
+			
 	private Orientation orientation;
 	
 	public  EngineInitializationCommand(int x, int y, Orientation orientation)
@@ -42,12 +46,12 @@ public class EngineInitializationCommand extends Engine implements Command
 			}
 			else
 			{
-				// TODO EXCEPTION
+				logger.error("OutSide moves on the lawnmower - Move of ["+this.getXPosition()+","+this.getYPosition()+"]" + "Initial Position : ["+lawnMowerModel.getXPosition()+","+lawnMowerModel.getYPosition()+"]");
 			}
 		}
 		else
 		{
-			// TODO EXCEPTION
+			logger.error("OutSide moves on the lawnmower - Move of ["+this.getXPosition()+","+this.getYPosition()+"]" + "Initial Position : ["+lawnMowerModel.getXPosition()+","+lawnMowerModel.getYPosition()+"]");
 		}
 	}
 }

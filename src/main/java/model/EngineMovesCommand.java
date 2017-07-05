@@ -2,11 +2,15 @@ package model;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import commons.Command;
 import commons.CommandType;
 
 public class EngineMovesCommand implements Command
 {
+	static final Logger logger = Logger.getLogger(EngineMovesCommand.class);
+			
 	private List<CommandType> commands;
 
 	public EngineMovesCommand(List<CommandType> commands)
@@ -31,14 +35,17 @@ public class EngineMovesCommand implements Command
 		{
 			if (command.equals(CommandType.LEFT_COMMAND))
 			{
+				logger.debug("turn left");
 				lawnMowerModel.turnLeft();
 			}
 			else if (command.equals(CommandType.RIGHT_COMMAND))
 			{
+				logger.debug("turn right");
 				lawnMowerModel.turnRight();
 			}
 			else if (command.equals(CommandType.MOVE_COMMAND))
 			{
+				logger.debug("move !!");
 				lawnMowerModel.move();
 			}
 		}

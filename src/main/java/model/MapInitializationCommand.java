@@ -1,10 +1,14 @@
 package model;
 
+import org.apache.log4j.Logger;
+
 import commons.Command;
 import commons.Engine;
 
 public class MapInitializationCommand extends Engine implements Command
 {
+	static final Logger logger = Logger.getLogger(MapInitializationCommand.class);
+			
 	public MapInitializationCommand(int x, int y)
 	{
 		this.setPositions(x, y);
@@ -15,7 +19,7 @@ public class MapInitializationCommand extends Engine implements Command
 	{
 		if (this.getXPosition() < 0 || this.getYPosition() < 0)
 		{
-			// TODO EXCEPTION
+			logger.fatal("Map sizes cannot be under 0");
 		}
 		else
 		{

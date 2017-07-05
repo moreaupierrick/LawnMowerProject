@@ -2,6 +2,8 @@ package map;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import commons.Command;
 import model.LawnMowerModel;
 
@@ -12,10 +14,13 @@ import model.LawnMowerModel;
  */
 public class MapManager
 {
+	static final Logger logger = Logger.getLogger(MapManager.class);
+	
 	private LawnMowerModel currentLawnMower;
 	
 	public MapManager()
 	{
+		logger.debug("Map creation!");
 		this.currentLawnMower = new LawnMowerModel();
 	}
 
@@ -30,11 +35,13 @@ public class MapManager
 	 */
 	public void execute(List<Command> commands)
 	{
+		logger.debug("Begin of commands execution!");
 		if (commands != null && !commands.isEmpty())
 		{
 			// for each commandModel, there is three case different (one per type of command)
 			for (Command command : commands)
 			{
+				logger.debug("execution of one command");
 				command.execute(this.currentLawnMower);
 			}
 		}

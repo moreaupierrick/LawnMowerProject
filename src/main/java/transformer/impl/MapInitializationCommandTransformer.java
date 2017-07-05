@@ -1,7 +1,8 @@
 package transformer.impl;
 
-import commons.Command;
+import org.apache.log4j.Logger;
 
+import commons.Command;
 import model.MapInitializationCommand;
 
 /**
@@ -12,6 +13,7 @@ import model.MapInitializationCommand;
 public class MapInitializationCommandTransformer
 {
 
+	static final Logger logger = Logger.getLogger(MapInitializationCommandTransformer.class);
 	/**
 	 * Simple constructor (useless actually but can be used after)
 	 */

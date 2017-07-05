@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 /**
  * That class is used to parse a text file line by line
  * @author PMoreau
@@ -12,6 +14,8 @@ import java.util.Scanner;
  */
 public class FileReader
 {
+	static final Logger logger = Logger.getLogger(FileReader.class);
+	
 	/**
 	 * used to parse the file line after line
 	 * @param filePath
@@ -50,6 +54,7 @@ public class FileReader
 	 */
 	private static File getFileFromRessources(String fileName)
 	{
+		logger.info("File research on the ressources folder");
 		//Get file from resources folder
 		ClassLoader classLoader = FileReader.class.getClassLoader();
 		return new File(classLoader.getResource(fileName).getFile());

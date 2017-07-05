@@ -1,5 +1,7 @@
 package transformer.impl;
 
+import org.apache.log4j.Logger;
+
 import utils.StringUtils;
 import commons.Command;
 import commons.Orientation;
@@ -12,6 +14,7 @@ import model.EngineInitializationCommand;
  */
 public class EngineInitializationCommandTransformer
 {
+	static final Logger logger = Logger.getLogger(EngineInitializationCommandTransformer.class);
 	/**
 	 * Simple constructor (useless actually but can be used after)
 	 */
@@ -36,7 +39,7 @@ public class EngineInitializationCommandTransformer
 		}
 		else 
 		{
-			// EXCEPTION
+			logger.fatal("The line doesn't contain three parameters");
 		}
 
 		return command;
@@ -64,7 +67,7 @@ public class EngineInitializationCommandTransformer
 		}
 		else 
 		{
-			// TODO GESTION D'ERREURS
+			logger.fatal("Unknown orientation : " + orientationChar);
 		}
 		
 		return orientation;

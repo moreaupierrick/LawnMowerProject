@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.log4j.Logger;
+
 import commons.Orientation;
 import commons.Engine;
 
@@ -10,6 +12,8 @@ import commons.Engine;
  */
 public class LawnMowerModel extends Engine
 {
+	static final Logger logger = Logger.getLogger(LawnMowerModel.class);
+			
 	private Orientation orientation;
 	private int mapWidth;
 	private int mapHeight;
@@ -89,6 +93,7 @@ public class LawnMowerModel extends Engine
 			{
 				if (this.getYPosition() < this.mapHeight)
 				{
+					logger.debug("Move from ["+this.getXPosition()+","+this.getYPosition()+"]" + "Initial Position : ["+this.getXPosition()+","+(this.getYPosition()+1)+"]");
 					this.setYPosition(this.getYPosition() + 1);
 				}
 			}
@@ -96,6 +101,7 @@ public class LawnMowerModel extends Engine
 			{
 				if (this.getYPosition() > 0)
 				{
+					logger.debug("Move from ["+this.getXPosition()+","+this.getYPosition()+"]" + "Initial Position : ["+this.getXPosition()+","+(this.getYPosition()-1)+"]");
 					this.setYPosition(this.getYPosition() - 1);
 				}
 			}
@@ -103,6 +109,7 @@ public class LawnMowerModel extends Engine
 			{
 				if (this.getXPosition() < this.mapWidth)
 				{
+					logger.debug("Move from ["+this.getXPosition()+","+this.getYPosition()+"]" + "Initial Position : ["+(this.getXPosition()+1)+","+this.getYPosition()+"]");
 					this.setXPosition(this.getXPosition() + 1);
 				}
 			}
@@ -110,6 +117,7 @@ public class LawnMowerModel extends Engine
 			{
 				if (this.getXPosition() > 0)
 				{
+					logger.debug("Move from ["+this.getXPosition()+","+this.getYPosition()+"]" + "Initial Position : ["+(this.getXPosition()-1)+","+this.getYPosition()+"]");
 					this.setXPosition(this.getXPosition() - 1);
 				}
 			}
@@ -123,6 +131,7 @@ public class LawnMowerModel extends Engine
 	{
 		if (this.orientation != null)
 		{
+			logger.debug("Turn right from " + this.orientation);
 			if (this.orientation.equals(Orientation.NORTH_ORIENTATION))
 			{
 				this.orientation = Orientation.EAST_ORIENTATION;
@@ -149,6 +158,7 @@ public class LawnMowerModel extends Engine
 	{
 		if (this.orientation != null)
 		{
+			logger.debug("Turn left from " + this.orientation);
 			if (this.orientation.equals(Orientation.NORTH_ORIENTATION))
 			{
 				this.orientation = Orientation.WEST_ORIENTATION;

@@ -3,6 +3,8 @@ package transformer.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import utils.StringUtils;
 import commons.Command;
 import commons.CommandType;
@@ -15,7 +17,7 @@ import model.EngineMovesCommand;
  */
 public class EngineMovesCommandTransformer
 {
-	
+	static final Logger logger = Logger.getLogger(EngineMovesCommandTransformer.class);
 	/**
 	 * Simple constructor (useless actually but can be used after)
 	 */
@@ -29,7 +31,6 @@ public class EngineMovesCommandTransformer
 	 */
 	public Command transform(String line) 
 	{
-		// TODO GESTION DES ERREURS
 		line = line.replace(" ", "");
 		List<CommandType> commandTypes = new ArrayList<CommandType>();
 		Command command = null;
@@ -72,7 +73,7 @@ public class EngineMovesCommandTransformer
 		}
 		else 
 		{
-			// TODO GESTION D'ERREURS
+			logger.fatal("Unknown move type : " + commandChar);
 		}
 		
 		return commandType;
